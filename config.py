@@ -25,7 +25,7 @@ def get_chat_model():
 
 
 def get_embedding_model():
-    provider = os.getenv("EMBEDDING_PROVIDER", "gemini").lower()
+    provider = os.getenv("EMBEDDING_PROVIDER", "ollama").lower()
     if provider == "gemini":
         if not os.getenv("GOOGLE_API_KEY"):
             raise ValueError(

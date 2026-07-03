@@ -8,7 +8,7 @@ from retrieve import get_retriever
 from chain import format_docs
 from store import load_store
 
-MAX_STEPS = 4
+MAX_STEPS = 10
 
 
 class PlanDecision(BaseModel):
@@ -75,13 +75,15 @@ def write_node(state: PunditState) -> dict:
     gathered_text = "\n\n".join(state["gathered"]) or "(no records gathered)"
 
     pundit_prompt = (
-        "You are a professional pundit for the FIFA World Cup 2026.\n\n"
-        f"Context gathered so far:\n{gathered_text}\n\n"
-        "You have access to all the topics provided to you, you are required to produce "
-        "an analytical take on those topics (just a few sentences to grab an online reader's "
-        "attention on Twitter). U can also have your own hot take on the situation but keep it analytical."
-        "Cite the records (the [Source N] labels are in the gathered text). "
-        "Stay ANALYTICAL, never pass unfounded verdicts."
+        f"You are writing an analytical take on: {state['topic']}\n\n"
+        f"Context gathered:\n{gathered_text}\n\n"
+        "Find the single most surprising, uncomfortable, or overlooked pattern in the "
+        "records -- the one angle a bold, committed take could be built "
+        "around. It has to be a pattern actually present in the records, not invented "
+        "and not a judgment: 'wins ugly, sixteen fouls a game' is a pattern; 'doesn't "
+        "deserve to win' is a judgment, and judgments are off-limits.\n\n"
+        "Now, write the finished take in a few punchy sentences, fully committed to that one angle. "
+        "Do not summarize. Do not list multiple facts. Build the whole take around the one angle."
     )
 
     statement = model.invoke(pundit_prompt)

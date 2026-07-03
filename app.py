@@ -3,8 +3,9 @@ from langchain_core.messages import HumanMessage, AIMessage
 
 from history_chain import build_history_aware_chain
 
-st.set_page_config(page_title="Pitch IQ — Ask the Tournament", page_icon="⚽")
-st.title("⚽ Pitch IQ — Ask the Tournament")
+st.set_page_config(
+    page_title="Pitch Pundit — Ask the Tournament", page_icon="⚽")
+st.title("⚽ Pitch Pundit — Ask the Tournament")
 st.caption(
     "Grounded Q&A on the FIFA World Cup 2026. Answers come only from official match records.")
 
