@@ -25,7 +25,7 @@ def fetch_worldcup(year, force=False):
 
 
 if __name__ == "__main__":
-    fetch_worldcup(2026)
+    fetch_worldcup(2026, force=True)
     fetch_worldcup(2022)
     fetch_worldcup(2018)
     print("Done")
